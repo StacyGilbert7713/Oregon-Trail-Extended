@@ -20,19 +20,19 @@ class Traveler {
 }
 
 class Doctor extends Traveler {
-    constructor (name) {
-    super(name)
+    constructor(name, food, isHealthy) {
+    super(name, food, isHealthy)
     }
-    heal(traveler){
+
+    heal(traveler) {
         return traveler.isHealthy = true
     }
 }
 
 class Hunter extends Traveler {
-    constructor(name) {
-        super(name)
+    constructor(name, food, isHealthy) {
+        super(name, food, isHealthy)
         this.food = 2
-        this.isHealthy = true
     }
 
     hunt() {
@@ -42,24 +42,22 @@ class Hunter extends Traveler {
     eat() {
         if (this.food < 2) {
             this.isHealthy = false
-            this.food = this.food - 1
+           this.food = 0
         } else {
-            this.isHealthy = true
-            this.food = this.food - 2
+            this.food -= 2
         }
+        return this
     }
 
      giveFood(traveler, numOfFoodUnits) { 
         if (this.food> 2) {
             this.food -= numOfFoodUnits
-        } else {
-             if(this.food < 2) {
+        } else if(this.food < 2) {
             return 0
             }
         return traveler.food += numOfFoodUnits
         }
     }
-}
 
 class Wagon {
     constructor (capacity) {
@@ -85,16 +83,14 @@ class Wagon {
        return sick
     } 
 
-    totalFood () {
-        const food = this.passenger.map (traveler => traveler.food)
-        let totalFood = 4
-        for (let index = 0; index < food.length; index++) {
-            totalFood = totalFood += food [index]
-        }
+    totalFood() {
+        const food = this.passenger.map(traveler => traveler.food)
+        let totalFood = food.reduce((a, b) => a + b, 0)
+    
         return totalFood
     }
 }
 
-/*You are passing the tests, however the getAvailableSeatCount is not set up to handle wagon instances with 
-capacities greater than 2. Really you do not need a conditional, you just need to always` return this.capacity
-- this.passenger.length`. This will give 0 when the the length of this.passengers is equal to this.capacity.*/
+/* Hunter eat method - if the hunter has less than 2 food and they try to eat, the amount of food they have should become 0. Having "this.food=this.food-1" could cause negative amounts of food.
+Hunter giveFood method - you need a condition that checks if the hunter at least has the amount of food being given (no need to make sure the hunter has 2 food after the transfer) If that condition is true, the hunters food decreases and the travelers food increases. You have some of this, since the "traveler.food+=numOfFoodUnits" is an else code block, both are not able to happen.
+Wagon totalFood method - the totalFood should not start at 4.*/
