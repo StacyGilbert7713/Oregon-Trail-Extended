@@ -90,6 +90,3 @@ class Wagon {
     }
 }
 
-/* Hunter eat method - if the hunter has less than 2 food and they try to eat, the amount of food they have should become 0. Having "this.food=this.food-1" could cause negative amounts of food.
-Hunter giveFood method - you need a condition that checks if the hunter at least has the amount of food being given (no need to make sure the hunter has 2 food after the transfer) If that condition is true, the hunters food decreases and the travelers food increases. You have some of this, since the "traveler.food+=numOfFoodUnits" is an else code block, both are not able to happen.
-Wagon totalFood method - the totalFood should not start at 4.*/
