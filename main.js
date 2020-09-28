@@ -49,15 +49,14 @@ class Hunter extends Traveler {
         return this
     }
 
-     giveFood(traveler, numOfFoodUnits) { 
-        if (this.food> 2) {
+    giveFood(traveler, numOfFoodUnits) {
+        if (this.food >= numOfFoodUnits) {
             this.food -= numOfFoodUnits
-        } else if(this.food < 2) {
-            return 0
-            }
-        return traveler.food += numOfFoodUnits
+            traveler.food += numOfFoodUnits
         }
     }
+}
+
 
 class Wagon {
     constructor (capacity) {
